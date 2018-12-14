@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 16:50:41 by marvin            #+#    #+#             */
-/*   Updated: 2018/12/13 17:14:23 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/14 17:06:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,21 @@ t_tetri					*write_new_tetri(t_tetri *list, t_uchar matrix[4][4]);
 t_uchar					**trim_tetri(t_uchar matrix[4][4], int params[4],
 		int tetri_count);
 
-void					print_array_uchar(t_uchar **matrix, int width,
-		int height);
+void					print_array_uchar(int width, int height,
+		t_uchar matrix[width][height]);
 void					print_tetris(t_tetri *list);
 int						list_count(t_tetri *list);
-void					copy_field(t_uchar **field, t_uchar
-		**new_field, int size);
+void					copy_field(int size, t_uchar field[size][size], t_uchar
+		new_field[size][size]);
 t_uchar					**alloc_memory(int size);
 int						find_max_count(t_tetri *list);
 
-int						prepare_to_solve(t_tetri *list);
-t_uchar					**solver(t_tetri *list, int size);
-int						sum_arrays(t_tetri *list, int size, t_uchar field[size][size],
-		int params[2]);
+int						prepare_to_solve(t_tetri *list, int size);
+int						solver(t_tetri *list, int size,
+		t_uchar field[size][size], int *flag);
+int						sum_arrays(t_tetri *list, int size,
+		t_uchar field[size][size], int params[2]);
+int						output(int size, t_uchar cur_field[size][size],
+		t_uchar field[size][size], int *flag);
 
 #endif

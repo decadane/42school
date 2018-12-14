@@ -6,32 +6,15 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 17:45:58 by marvin            #+#    #+#             */
-/*   Updated: 2018/12/13 15:38:30 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/14 16:50:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
 
-t_uchar	**alloc_memory(int size)
-{
-	t_uchar	**result;
-	int		i;
-
-	i = 1;
-	result = (t_uchar**)malloc(size * sizeof(t_uchar*) + size *
-			size * sizeof(t_uchar));
-	result[0] = (t_uchar*)(result + size);
-	while (i < size)
-	{
-		result[i] = result[0] + i * size;
-		i++;
-	}
-	ft_init_array2_uchar(size, size, result, 0);
-	return (result);
-}
-
-void	copy_field(t_uchar **field, t_uchar **new_field, int size)
+void	copy_field(int size, t_uchar field[size][size],
+		t_uchar new_field[size][size])
 {
 	int		i;
 	int		j;
@@ -49,7 +32,7 @@ void	copy_field(t_uchar **field, t_uchar **new_field, int size)
 	}
 }
 
-void	print_array_uchar(t_uchar **matrix, int width, int height)
+void	print_array_uchar(int width, int height, t_uchar matrix[width][height])
 {
 	int		i;
 	int		j;

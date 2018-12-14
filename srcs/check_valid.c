@@ -6,11 +6,12 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 11:08:53 by marvin            #+#    #+#             */
-/*   Updated: 2018/12/13 17:15:15 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/14 16:48:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 void	clean_tetri(t_tetri *list)
 {

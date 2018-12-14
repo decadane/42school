@@ -6,11 +6,11 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/08 15:46:51 by marvin            #+#    #+#              #
-#    Updated: 2018/12/13 15:54:51 by marvin           ###   ########.fr        #
+#    Updated: 2018/12/14 14:39:05 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-compile_flags = -Wall -Wextra -Werror
+compile_flags = -Wall -Wextra -Werror -g
 
 NAME := fillit
 source_dirs  := srcs

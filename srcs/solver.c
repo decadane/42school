@@ -6,11 +6,21 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 18:24:39 by marvin            #+#    #+#             */
-/*   Updated: 2018/12/13 17:31:36 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/14 17:03:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
+
+int		output(int size, t_uchar cur_field[size][size],
+		t_uchar field[size][size], int *flag)
+{
+	copy_field(size, cur_field, field);
+	*flag = 1;
+	print_array_uchar(size, size, cur_field);
+	return (*flag);
+}
 
 int		checker(int size, t_uchar field[size][size])
 {
@@ -32,7 +42,8 @@ int		checker(int size, t_uchar field[size][size])
 	return (1);
 }
 
-int		sum_arrays(t_tetri *list, int size, t_uchar cur_field[size][size], int params[2])
+int		sum_arrays(t_tetri *list, int size,
+		t_uchar cur_field[size][size], int params[2])
 {
 	int		i;
 	int		j;
@@ -51,44 +62,50 @@ int		sum_arrays(t_tetri *list, int size, t_uchar cur_field[size][size], int para
 	return (checker(size, cur_field));
 }
 
-t_uchar	**solver(t_tetri *list, int size)
+int		solver(t_tetri *list, int size, t_uchar field[size][size], int *flag)
 {
-	t_uchar	field[size][size];
-	t_uchar	result[size][size];
+	t_uchar	cur_field[size][size];
 	int		params[2];
 
 	params[0] = -1;
+	ft_init_array2_uchar(size, size, cur_field, 0);
 	while (++params[0] < size - list->height + 1)
 	{
 		params[1] = -1;
 		while (++params[1] < size - list->width + 1)
 		{
-			if (sum_arrays(list, size, field, params))
+			copy_field(size, field, cur_field);
+			if (sum_arrays(list, size, cur_field, params))
 			{
 				if (list->next == NULL)
-					result = field;
+				{
+					output(size, cur_field, field, flag);
+				}
 				else
-					result = solver(list->next, size);
+					solver(list->next, size, cur_field, flag);
 			}
+			if (*flag)
+				return (1);
 		}
 	}
-	print_array_uchar(result, size, size);
-	return (result);
+	return (*flag);
 }
 
-int		prepare_to_solve(t_tetri *list)
+int		prepare_to_solve(t_tetri *list, int size)
 {
-	int		size;
 	int		i;
+	t_uchar	field[size][size];
+	int		flag;
 
+	flag = 0;
+	ft_init_array2_uchar(size, size, field, 0);
 	i = 1;
-	size = MAX(ft_sqrt(list_count(list) * 4), find_max_count(list));
-	while (1)
+	while (!flag)
 	{
-		result = solver(list, size);
-		if (result)
+		if (solver(list, size, field, &flag))
 			break ;
-		size++;
+		prepare_to_solve(list, size + 1);
+		return (0);
 	}
-	return (0);
+	return (1);
 }

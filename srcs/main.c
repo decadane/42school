@@ -6,11 +6,12 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 15:43:20 by marvin            #+#    #+#             */
-/*   Updated: 2018/12/13 16:28:14 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/14 16:41:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 t_tetri	*write_all_tetris(int fd, t_tetri *list,
 		t_uchar matrix[4][4], int result)
@@ -43,6 +44,7 @@ int		main(int argc, char *argv[])
 	t_tetri	*list;
 	t_uchar	matrix[4][4];
 	int		result;
+	int		size;
 
 	list = NULL;
 	result = 0;
@@ -59,7 +61,8 @@ int		main(int argc, char *argv[])
 		ft_putstr("error\n");
 		return (0);
 	}
-	prepare_to_solve(list);
+	size = MAX(ft_sqrt(list_count(list) * 4), find_max_count(list));
+	prepare_to_solve(list, size);
 	clean_tetri(list);
 	return (1);
 }
